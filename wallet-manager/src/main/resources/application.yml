@@ -1,0 +1,13 @@
+spring:
+  application:
+    name: wallet-manager
+  profiles:
+    active: local
+server:
+  port: 9882
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: '*'
