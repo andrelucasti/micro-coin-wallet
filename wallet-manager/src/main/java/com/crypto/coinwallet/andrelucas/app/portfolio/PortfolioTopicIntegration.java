@@ -1,12 +1,18 @@
 package com.crypto.coinwallet.andrelucas.app.portfolio;
 
-import com.crypto.coinwallet.andrelucas.business.portfolio.PortfolioIntegration;
+import com.crypto.coinwallet.andrelucas.app.IntegrationException;
 import com.crypto.coinwallet.andrelucas.business.portfolio.Portfolio;
+import com.crypto.coinwallet.andrelucas.business.portfolio.PortfolioIntegration;
 import io.awspring.cloud.sns.core.SnsTemplate;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.messaging.support.MessageBuilder;
 import org.springframework.stereotype.Service;
 
+import java.util.UUID;
+
 @Service
+@Slf4j
 public class PortfolioTopicIntegration implements PortfolioIntegration {
 
     private final String topicName;
@@ -20,8 +26,19 @@ public class PortfolioTopicIntegration implements PortfolioIntegration {
 
     @Override
     public void send(Portfolio portfolio) {
+        var traceId = UUID.randomUUID();
         var portfolioIntegrationDTO = new PortfolioIntegrationDTO(portfolio.id(), portfolio.name());
 
-        snsTemplate.convertAndSend(topicName, portfolioIntegrationDTO);
+        try {
+          log.info(String.format("Sending message to topic - %s traceId %s", topicName, traceId));
+          snsTemplate.convertAndSend(topicName, portfolioIntegrationDTO);
+      }catch (Exception e){
+          String errorMsg = String.format("Got error to send the portfolio %s  to topic - %s traceId %s",
+                  portfolio.id(),
+                  topicName,
+                  traceId);
+
+          throw new IntegrationException(errorMsg, e);
+      }
     }
 }

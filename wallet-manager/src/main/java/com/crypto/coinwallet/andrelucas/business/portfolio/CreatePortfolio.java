@@ -15,6 +15,12 @@ public class CreatePortfolio {
 
     public void execute(Portfolio portfolio){
         portfolioRepository.save(portfolio);
-        portfolioIntegration.send(portfolio);
+
+        //TODO must be async and when transaction to be committed
+        var newPortfolio = portfolioRepository
+                .findByUserIdAndName(portfolio.userId(), portfolio.name())
+                .orElseThrow(PortfolioNotFoundException::new);
+
+        portfolioIntegration.send(newPortfolio);
     }
 }

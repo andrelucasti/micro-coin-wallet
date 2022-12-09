@@ -1,23 +1,41 @@
 package com.crypto.coinwallet.andrelucas.thirdparty.walletManager.portfolio;
 
+import com.crypto.coinwallet.andrelucas.business.portfolio.Portfolio;
+import com.crypto.coinwallet.andrelucas.business.portfolio.PortfolioRepository;
 import com.crypto.coinwallet.andrelucas.thirdparty.walletManager.ConsumerException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import io.awspring.cloud.sqs.annotation.SqsListener;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.messaging.handler.annotation.Header;
+import org.springframework.messaging.Message;
 import org.springframework.messaging.handler.annotation.MessageExceptionHandler;
+import org.springframework.stereotype.Service;
 
 @Slf4j
+@Service
 public class PortfolioConsumer {
-    public void consumer(final String message,
-                         @Header("MessageId") final String senderId){
+    private final ObjectMapper objectMapper;
+    private final PortfolioRepository portfolioRepository;
 
+
+    public PortfolioConsumer(final ObjectMapper objectMapper,
+                             final PortfolioRepository portfolioRepository) {
+        this.objectMapper = objectMapper;
+        this.portfolioRepository = portfolioRepository;
+    }
+
+    @SqsListener(value = "${consumer.portfolio.queue-name}")
+    public void consumer(final Message<String> message){
         try {
 
-            System.out.println(message);
+            var body = objectMapper.readTree(message.getPayload()).get("Message").textValue();
+            var portfolioConsumerDTO = objectMapper.readValue(body, PortfolioConsumerDTO.class);
 
-            log.info(String.format("Message received - MessageId: %s QueueName: %s", senderId, "name"));
+            portfolioRepository.save(new Portfolio(portfolioConsumerDTO.id(), portfolioConsumerDTO.name()));
+
+            log.info(String.format("receive message portfolio: id  %s", portfolioConsumerDTO.id()));
 
         } catch (Throwable e){
-            var errorMsg = String.format("got error at consumer portfolioDTO - SenderId: %s - message: %s", senderId, message);
+            var errorMsg = String.format("got error at consumer portfolioDTO");
             throw new ConsumerException(errorMsg, e);
         }
     }

@@ -55,4 +55,10 @@ public class PortfolioRepositoryImpl implements PortfolioBusinessRepository {
     public List<Portfolio> findBy(UUID userId) {
         return null;
     }
+
+    @Override
+    public Optional<Portfolio> findByUserIdAndName(UUID userId, String name) {
+        return portfolioCrudRepository.findByUserIdAndName(userId, name)
+                .map(portfolioConverter::convertFromEntityToModel);
+    }
 }

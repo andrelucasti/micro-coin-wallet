@@ -12,7 +12,7 @@ import javax.sql.DataSource;
 
 @Configuration
 @EnableTransactionManagement
-@EnableJpaRepositories
+@EnableJpaRepositories(basePackages = {"com.crypto.coinwallet.andrelucas.dataprovider"})
 public class DataSourceConfiguration {
 
     @Bean
