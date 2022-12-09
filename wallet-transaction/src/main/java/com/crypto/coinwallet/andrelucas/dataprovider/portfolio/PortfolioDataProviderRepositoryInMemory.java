@@ -28,4 +28,9 @@ public class PortfolioDataProviderRepositoryInMemory implements PortfolioDataPro
     public Optional<PortfolioEntity> findById(UUID id) {
         return Optional.ofNullable(dbMemory.get(id));
     }
+
+    @Override
+    public void deleteAll() {
+        dbMemory.clear();
+    }
 }

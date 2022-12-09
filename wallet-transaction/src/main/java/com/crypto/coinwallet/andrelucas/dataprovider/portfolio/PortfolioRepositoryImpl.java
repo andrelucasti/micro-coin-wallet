@@ -39,4 +39,9 @@ public class PortfolioRepositoryImpl implements PortfolioRepository {
         return portfolioDataProviderRepository.findById(id)
                 .map(portfolioEntity -> new Portfolio(portfolioEntity.getId(), portfolioEntity.getName()));
     }
+
+    @Override
+    public void deleteAll() {
+        portfolioDataProviderRepository.deleteAll();
+    }
 }

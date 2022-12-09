@@ -16,11 +16,9 @@ import java.util.concurrent.TimeUnit;
 
 class PortfolioTopicIntegrationIntegrationTest extends WalletManagerApplicationTests {
 
-    private @Value("${integration.portfolio.topic}") String topicName;
-
     @Autowired
     private PortfolioTopicIntegration portfolioTopicIntegration;
-
+    private @Value("${integration.portfolio.topic}") String topicName;
     @Test
     void shouldSendToTopic() throws URISyntaxException {
         var queueName = "wallet-test";
@@ -38,13 +36,11 @@ class PortfolioTopicIntegrationIntegrationTest extends WalletManagerApplicationT
             Assertions.assertThat(receiveMessageResponse.hasMessages()).isTrue();
 
         });
-
         Awaitility.await().atMost(60, TimeUnit.SECONDS).untilAsserted(()->{
             var receiveMessageResponse = receiveMessage(subscribeRequest.endpoint());
             Optional<PortfolioIntegrationDTO> optionalPortfolioDTO = receiveMessageResponse.messages().stream().findAny()
                     .map(Message::body)
                     .map(message -> convertFromSNSPayloadToObject(message, PortfolioIntegrationDTO.class));
-
             Assertions.assertThat(optionalPortfolioDTO).isNotEmpty();
             PortfolioIntegrationDTO portfolioDTO = optionalPortfolioDTO.get();
 

@@ -1,0 +1,25 @@
+{
+  "Type":"Notification",
+  "MessageId":"7a683be0-ee4f-439f-a49c-8b38cbe9716f",
+  "TopicArn":"arn:aws:sns:us-east-1:000000000000:wallet-manager-portfolio",
+  "Message":"{\"id\":\"{id}\",\"name\":\"{name}\"}",
+  "Timestamp":"2022-12-09T12:28:21.805Z",
+  "SignatureVersion":"1",
+  "Signature":"EXAMPLEpH+..",
+  "SigningCertURL":"https://sns.us-east-1.amazonaws.com/SimpleNotificationService-0000000000000000000000.pem",
+  "UnsubscribeURL":"http://localhost:4566/?Action=Unsubscribe&SubscriptionArn=arn:aws:sns:us-east-1:000000000000:wallet-manager-portfolio:8e08d6aa-3076-4e82-a4de-412b26df67bc",
+  "MessageAttributes":{
+    "id":{
+      "Type":"String",
+      "Value":"37e4a5f4-46bb-e981-f738-a5a75061cc69"
+    },
+    "contentType":{
+      "Type":"String",
+      "Value":"application/json"
+    },
+    "timestamp":{
+      "Type":"Number",
+      "Value":"1670614092081"
+    }
+  }
+}

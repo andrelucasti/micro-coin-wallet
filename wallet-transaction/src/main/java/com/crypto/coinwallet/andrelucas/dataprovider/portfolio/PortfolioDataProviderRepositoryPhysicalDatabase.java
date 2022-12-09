@@ -30,4 +30,9 @@ public class PortfolioDataProviderRepositoryPhysicalDatabase implements Portfoli
     public Optional<PortfolioEntity> findById(UUID id) {
         return walletTransactionPortfolioCrudRepository.findById(id);
     }
+
+    @Override
+    public void deleteAll() {
+        walletTransactionPortfolioCrudRepository.deleteAll();
+    }
 }

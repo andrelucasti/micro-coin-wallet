@@ -15,31 +15,25 @@ import org.springframework.stereotype.Service;
 public class PortfolioConsumer {
     private final ObjectMapper objectMapper;
     private final PortfolioRepository portfolioRepository;
-
-
     public PortfolioConsumer(final ObjectMapper objectMapper,
                              final PortfolioRepository portfolioRepository) {
         this.objectMapper = objectMapper;
         this.portfolioRepository = portfolioRepository;
     }
-
     @SqsListener(value = "${consumer.portfolio.queue-name}")
     public void consumer(final Message<String> message){
         try {
-
             var body = objectMapper.readTree(message.getPayload()).get("Message").textValue();
             var portfolioConsumerDTO = objectMapper.readValue(body, PortfolioConsumerDTO.class);
 
             portfolioRepository.save(new Portfolio(portfolioConsumerDTO.id(), portfolioConsumerDTO.name()));
 
             log.info(String.format("receive message portfolio: id  %s", portfolioConsumerDTO.id()));
-
         } catch (Throwable e){
-            var errorMsg = String.format("got error at consumer portfolioDTO");
+            var errorMsg = "got error at consumer portfolioDTO";
             throw new ConsumerException(errorMsg, e);
         }
     }
-
     @MessageExceptionHandler(value = ConsumerException.class)
     void handlerException(final ConsumerException e){
         log.error("handlerException", e);
