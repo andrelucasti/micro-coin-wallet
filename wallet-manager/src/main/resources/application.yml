@@ -11,3 +11,8 @@ management:
     web:
       exposure:
         include: '*'
+
+
+integration:
+  portfolio:
+    topic: wallet-manager-portfolio

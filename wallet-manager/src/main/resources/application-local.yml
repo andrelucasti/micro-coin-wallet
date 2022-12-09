@@ -10,3 +10,10 @@ spring:
   flyway:
     enabled: true # This is not recommended to production environment, the best way is to have the migration step in pipeline
     locations: db/migration
+
+
+  cloud:
+    aws:
+      sns:
+        enabled: true
+        endpoint: http://localhost:4566
