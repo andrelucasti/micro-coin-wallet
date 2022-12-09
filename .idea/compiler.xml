@@ -7,18 +7,22 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
-        <module name="wallet-manager" />
-        <module name="aws-resources" />
+        <module name="wallet-manager-aws-resources" />
+        <module name="wallet-transaction-aws-resources" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
       <module name="aws-resources" target="1.8" />
       <module name="wallet-manager" target="19" />
+      <module name="wallet-manager-aws-resources" target="1.8" />
+      <module name="wallet-transaction" target="19" />
+      <module name="wallet-transaction-aws-resources" target="1.8" />
     </bytecodeTargetLevel>
   </component>
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
-      <module name="wallet-manager" options="-parameters" />
+      <module name="wallet-manager" options="" />
+      <module name="wallet-transaction" options="" />
     </option>
   </component>
 </project>

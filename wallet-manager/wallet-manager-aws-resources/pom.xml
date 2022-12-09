@@ -3,9 +3,9 @@
          xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>com.myorg</groupId>
-    <artifactId>aws-resources</artifactId>
-    <version>0.1</version>
+    <groupId>com.crypto.coinwallet.andrelucas</groupId>
+    <artifactId>wallet-manager-aws-resources</artifactId>
+    <version>1.0</version>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -31,7 +31,7 @@
                 <artifactId>exec-maven-plugin</artifactId>
                 <version>3.0.0</version>
                 <configuration>
-                    <mainClass>com.myorg.AwsResourcesApp</mainClass>
+                    <mainClass>com.walletmanager.AwsApp</mainClass>
                 </configuration>
             </plugin>
         </plugins>

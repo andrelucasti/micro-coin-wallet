@@ -9,10 +9,10 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.crypto.coinwallet.andrelucas</groupId>
-	<artifactId>wallet-manager</artifactId>
+	<artifactId>wallet-transaction</artifactId>
 	<version>1.0</version>
-	<name>wallet-manager</name>
-	<description>Coin Wallet - Wallet Manager</description>
+	<name>wallet-transaction</name>
+	<description>Coin Wallet - Wallet Transaction</description>
 	<packaging>pom</packaging>
 	<properties>
 		<java.version>19</java.version>
@@ -20,14 +20,12 @@
 		<aws-java-sdk.version>2.18.28</aws-java-sdk.version>
 		<spring-cloud.version>2022.0.0-RC2</spring-cloud.version>
 	</properties>
-
 	<modules>
-		<module>wallet-manager-aws-resources</module>
+		<module>wallet-transaction-aws-resources</module>
 	</modules>
 
 	<dependencies>
-
-	<!-- springboot dependencies -->
+		<!-- springboot dependencies -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-actuator</artifactId>
@@ -132,18 +130,4 @@
 		</plugins>
 	</build>
 
-<!--
-	<build>
-		<plugins>
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-compiler-plugin</artifactId>
-				<version>3.10.1</version>
-				<configuration>
-					<source>19</source>
-					<target>19</target>
-				</configuration>
-			</plugin>
-		</plugins>
-	</build>-->
 </project>
