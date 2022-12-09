@@ -10,9 +10,9 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 import javax.sql.DataSource;
 
-@EnableJpaRepositories(basePackages = {"com.crypto.coinwallet.andrelucas.dataprovider"})
 @Configuration
 @EnableTransactionManagement
+@EnableJpaRepositories
 public class DataSourceConfiguration {
 
     @Bean
@@ -23,3 +23,5 @@ public class DataSourceConfiguration {
                 .build();
     }
 }
+
+

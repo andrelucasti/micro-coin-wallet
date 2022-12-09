@@ -13,17 +13,13 @@
 	<version>1.0</version>
 	<name>wallet-manager</name>
 	<description>Coin Wallet - Wallet Manager</description>
-	<packaging>pom</packaging>
+
 	<properties>
 		<java.version>19</java.version>
 		<spring-cloud-aws.version>3.0.0-M3</spring-cloud-aws.version>
 		<aws-java-sdk.version>2.18.28</aws-java-sdk.version>
 		<spring-cloud.version>2022.0.0-RC2</spring-cloud.version>
 	</properties>
-
-	<modules>
-		<module>wallet-manager-aws-resources</module>
-	</modules>
 
 	<dependencies>
 

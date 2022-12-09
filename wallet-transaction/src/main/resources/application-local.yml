@@ -1,0 +1,18 @@
+spring:
+  datasource:
+    hikari:
+      jdbc-url: jdbc:postgresql://localhost:54322/wallet-transaction
+      pool-name: wallet-transaction-hikari-pool
+      driver-class-name: org.postgresql.Driver
+      username: wallet-transaction
+      password: wallet-transaction
+
+  flyway:
+    enabled: true # This is not recommended to production environment, the best way is to have the migration step in pipeline
+    locations: db/migration
+
+  cloud:
+    aws:
+      sqs:
+        endpoint: http://localhost:4566
+        region: us-east-1

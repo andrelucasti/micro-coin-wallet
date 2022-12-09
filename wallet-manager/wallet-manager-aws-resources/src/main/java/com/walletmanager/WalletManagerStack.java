@@ -1,6 +1,7 @@
 package com.walletmanager;
 
-import com.crypto.walletmanager.sns.SNSStack;
+
+import com.walletmanager.sns.SNSStack;
 import software.amazon.awscdk.Stack;
 import software.amazon.awscdk.StackProps;
 import software.constructs.Construct;

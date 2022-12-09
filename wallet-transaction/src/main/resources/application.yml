@@ -1,0 +1,18 @@
+spring:
+  application:
+    name: wallet-manager
+  profiles:
+    active: local
+server:
+  port: 9883
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: '*'
+
+
+consumer:
+  portfolio:
+    queue-name: wallet-manager-portfolio-to-wallet-transaction
