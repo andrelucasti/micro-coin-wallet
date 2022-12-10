@@ -26,17 +26,15 @@ public class PortfolioTopicIntegration implements PortfolioIntegration {
 
     @Override
     public void send(Portfolio portfolio) {
-        var traceId = UUID.randomUUID();
         var portfolioIntegrationDTO = new PortfolioIntegrationDTO(portfolio.id(), portfolio.name());
 
         try {
-          log.info(String.format("Sending message to topic - %s traceId %s", topicName, traceId));
+          log.info(String.format("Sending message to topic - %s portfolioId %s", topicName, portfolio.id()));
           snsTemplate.convertAndSend(topicName, portfolioIntegrationDTO);
       }catch (Exception e){
-          String errorMsg = String.format("Got error to send the portfolio %s  to topic - %s traceId %s",
+          String errorMsg = String.format("Got error to send the portfolio %s  to topic - %s",
                   portfolio.id(),
-                  topicName,
-                  traceId);
+                  topicName);
 
           throw new IntegrationException(errorMsg, e);
       }

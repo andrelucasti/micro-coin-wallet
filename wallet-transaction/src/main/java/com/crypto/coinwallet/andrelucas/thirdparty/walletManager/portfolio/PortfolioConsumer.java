@@ -21,7 +21,7 @@ public class PortfolioConsumer {
         this.portfolioRepository = portfolioRepository;
     }
     @SqsListener(value = "${consumer.portfolio.queue-name}")
-    public void consumer(final Message<String> message){
+    public void consume(final Message<String> message){
         try {
             var body = objectMapper.readTree(message.getPayload()).get("Message").textValue();
             var portfolioConsumerDTO = objectMapper.readValue(body, PortfolioConsumerDTO.class);

@@ -2,7 +2,7 @@ spring:
   application:
     name: wallet-manager
   profiles:
-    active: local
+    active: dev
 server:
   port: 9883
 

@@ -1,13 +1,18 @@
 spring:
-  application:
-    name: wallet-manager
-  profiles:
-    active: local
-server:
-  port: 9882
+  datasource:
+    hikari:
+      jdbc-url: jdbc:postgresql://localhost:54321/wallet-manager
+      pool-name: wallet-manager-hikari-pool
+      driver-class-name: org.postgresql.Driver
+      username: wallet-manager
+      password: wallet-manager
 
-management:
-  endpoints:
-    web:
-      exposure:
-        include: '*'
+  flyway:
+    enabled: true # This is not recommended to production environment, the best way is to have the migration step in pipeline
+    locations: db/migration
+
+
+  cloud:
+    aws:
+      sns:
+        enabled: true

@@ -17,10 +17,13 @@ import java.util.UUID;
 import java.util.concurrent.TimeUnit;
 
 class PortfolioConsumerIntegrationTest extends WalletTransactionApplicationTests {
+
     @Value("${consumer.portfolio.queue-name}")
     private String queueName;
+
     @Autowired
     private PortfolioRepository portfolioRepository;
+
     @Test
     void shouldCreatePortfolioWhenReceiveFromQueue() throws IOException, URISyntaxException {
         var id = UUID.randomUUID();

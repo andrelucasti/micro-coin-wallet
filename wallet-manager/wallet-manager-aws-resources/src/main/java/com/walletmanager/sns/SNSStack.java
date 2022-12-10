@@ -11,8 +11,6 @@ public class SNSStack {
 
     public void execute(){
         Topic.Builder.create(scope, "wallet-manager-portfolio")
-                .fifo(false)
-                .contentBasedDeduplication(false)
                 .topicName("wallet-manager-portfolio")
                 .build();
     }

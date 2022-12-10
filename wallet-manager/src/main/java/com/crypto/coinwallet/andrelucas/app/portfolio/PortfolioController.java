@@ -29,7 +29,7 @@ public class PortfolioController {
 
     @PostMapping
     @ResponseBody
-    public ResponseEntity<PortfolioResponse> newPortfolio(@RequestHeader UUID userId,
+    public ResponseEntity<Void> newPortfolio(@RequestHeader UUID userId,
                                                           @RequestBody PortfolioRequest portfolioRequest){
 
         var portfolio = new Portfolio(portfolioRequest.name(), userId);

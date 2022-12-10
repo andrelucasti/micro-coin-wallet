@@ -19,7 +19,7 @@ public class AwsApp {
     }
     private static void executeStacks(App app, String accountId, String region) {
 
-        new WalletManagerStack(app, "wallet-manager-stack",
+        new WalletManagerStack(app, "wallet-manager-aws-resource-stack",
                     StackProps.builder().env(getEnv(accountId, region))
                             .build());
 
