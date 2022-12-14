@@ -6,13 +6,10 @@ import com.crypto.coinwallet.andrelucas.business.portfolio.PortfolioIntegration;
 import io.awspring.cloud.sns.core.SnsTemplate;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.messaging.support.MessageBuilder;
 import org.springframework.stereotype.Service;
 
-import java.util.UUID;
-
-@Service
 @Slf4j
+@Service
 public class PortfolioTopicIntegration implements PortfolioIntegration {
 
     private final String topicName;

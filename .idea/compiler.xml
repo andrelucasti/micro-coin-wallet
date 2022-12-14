@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="CompilerConfiguration">
+    <option name="USE_RELEASE_OPTION" value="false" />
     <annotationProcessing>
       <profile default="true" name="Default" enabled="true" />
       <profile name="Maven default annotation processors profile" enabled="true">
@@ -13,8 +14,7 @@
         <module name="wallet-transaction-aws-resources" />
       </profile>
     </annotationProcessing>
-    <bytecodeTargetLevel>
-      <module name="aws-resources" target="1.8" />
+    <bytecodeTargetLevel target="19">
       <module name="wallet-manager" target="19" />
       <module name="wallet-manager-aws-resources" target="1.8" />
       <module name="wallet-transaction" target="19" />
@@ -22,6 +22,7 @@
     </bytecodeTargetLevel>
   </component>
   <component name="JavacSettings">
+    <option name="ADDITIONAL_OPTIONS_STRING" value="--enable-preview" />
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
       <module name="wallet-manager" options="-parameters" />
       <module name="wallet-transaction" options="-parameters" />
