@@ -10,6 +10,7 @@ env:
   AWS_ACCESS_KEY_ID: ${{secrets.AWS_ACCESS_KEY_ID}}
   AWS_SECRET_ACCESS_KEY: ${{secrets.AWS_SECRET_ACCESS_KEY}}
   AWS_DEFAULT_REGION: ${{secrets.AWS_REGION}}
+  AWS_ACCOUNT_ID: ${{secrets.AWS_ACCOUNT_ID}}
 
 
 jobs:
@@ -29,12 +30,11 @@ jobs:
            cache: 'maven'
 
       - name: NPM install
-        working-directory: wallet-manager/wallet-manager-aws-resources
-        run: npm install
+        run: npm install -g aws-cdk
 
       - name: NPM bootstrap
         working-directory: wallet-manager/wallet-manager-aws-resources
-        run: npm run bootstrap
+        run: cdk bootstrap -c accountId=${{ env.AWS_ACCOUNT_ID }} -c region=${{ env.AWS_DEFAULT_REGION }}
 
 
 
