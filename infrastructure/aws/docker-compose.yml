@@ -7,4 +7,4 @@ services:
       - "4566:4566"
       - "8283:8080"
     environment:
-      - "SERVICES=sqs,sns"
+      - "SERVICES=sqs,sns,secretsmanager"

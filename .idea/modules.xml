@@ -3,7 +3,9 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/.idea/microservices-coin-wallet.iml" filepath="$PROJECT_DIR$/.idea/microservices-coin-wallet.iml" />
+      <module fileurl="file://$PROJECT_DIR$/wallet-manager/wallet-manager.iml" filepath="$PROJECT_DIR$/wallet-manager/wallet-manager.iml" />
       <module fileurl="file://$PROJECT_DIR$/wallet-manager/wallet-manager-aws-resources/wallet-manager-aws-resources.iml" filepath="$PROJECT_DIR$/wallet-manager/wallet-manager-aws-resources/wallet-manager-aws-resources.iml" />
+      <module fileurl="file://$PROJECT_DIR$/wallet-transaction/wallet-transaction.iml" filepath="$PROJECT_DIR$/wallet-transaction/wallet-transaction.iml" />
       <module fileurl="file://$PROJECT_DIR$/wallet-transaction/wallet-transaction-aws-resources/wallet-transaction-aws-resources.iml" filepath="$PROJECT_DIR$/wallet-transaction/wallet-transaction-aws-resources/wallet-transaction-aws-resources.iml" />
     </modules>
   </component>

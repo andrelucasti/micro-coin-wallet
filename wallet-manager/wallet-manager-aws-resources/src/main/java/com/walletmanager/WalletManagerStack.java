@@ -1,6 +1,7 @@
 package com.walletmanager;
 
 
+import com.walletmanager.rds.RDSStack;
 import com.walletmanager.sns.SNSStack;
 import software.amazon.awscdk.Stack;
 import software.amazon.awscdk.StackProps;
@@ -12,5 +13,8 @@ public class WalletManagerStack extends Stack {
 
         SNSStack snsStack = new SNSStack(this);
         snsStack.execute();
+
+        RDSStack rdsStack = new RDSStack(this, props, "walletManagerDBSecret");
+        rdsStack.execute();
     }
 }

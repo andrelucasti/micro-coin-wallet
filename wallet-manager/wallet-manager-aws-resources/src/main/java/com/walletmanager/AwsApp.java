@@ -8,7 +8,7 @@ public class AwsApp {
     public static void main(final String[] args) {
         App app = new App();
         Account account = new Account(app);
-
+        
         String accountId = account.getAccountId();
         String region = account.getRegion();
 

@@ -3,9 +3,11 @@
   <component name="MavenProjectsManager">
     <option name="originalFiles">
       <list>
+        <option value="$PROJECT_DIR$/wallet-transaction/aws-resources/pom.xml" />
         <option value="$PROJECT_DIR$/wallet-manager/pom.xml" />
         <option value="$PROJECT_DIR$/wallet-transaction/pom.xml" />
-        <option value="$PROJECT_DIR$/wallet-transaction/aws-resources/pom.xml" />
+        <option value="$PROJECT_DIR$/wallet-manager/wallet-manager-aws-resources/pom.xml" />
+        <option value="$PROJECT_DIR$/wallet-transaction/wallet-transaction-aws-resources/pom.xml" />
       </list>
     </option>
   </component>
