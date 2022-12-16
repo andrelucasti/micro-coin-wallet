@@ -14,9 +14,9 @@ env:
 
 
 jobs:
-  wm-bootstrap:
+  wallet-manager-deploy:
     runs-on: ubuntu-20.04
-    name: Bootstrap CDK Wallet Manager
+    name: Bootstrap & Deploy CDK Wallet Manager
     steps:
 
       - name: Checkout
@@ -34,6 +34,28 @@ jobs:
 
       - name: NPM bootstrap
         working-directory: wallet-manager/wallet-manager-aws-resources
+        run: cdk bootstrap -c accountId=${{ env.AWS_ACCOUNT_ID }} -c region=${{ env.AWS_DEFAULT_REGION }}
+
+  wallet-transaction-deploy:
+    runs-on: ubuntu-20.04
+    name: Bootstrap & Deploy CDK Wallet Transaction
+    steps:
+
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Set up JDK
+        uses: actions/checkout@v2
+        with:
+          distribution: 'temurin'
+          java-version: 19
+          cache: 'maven'
+
+      - name: NPM install
+        run: npm install -g aws-cdk
+
+      - name: NPM bootstrap
+        working-directory: wallet-transaction/wallet-transaction-aws-resources
         run: cdk bootstrap -c accountId=${{ env.AWS_ACCOUNT_ID }} -c region=${{ env.AWS_DEFAULT_REGION }}
 
 
