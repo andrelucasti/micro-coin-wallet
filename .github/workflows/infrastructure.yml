@@ -25,7 +25,7 @@ jobs:
         uses: actions/setup-java@v3
         with:
            distribution: 'temurin'
-           java-version: 17
+           java-version: 19
            cache: 'maven'
 
       - name: Install aws cdk
@@ -52,7 +52,7 @@ jobs:
         uses: actions/setup-java@v3
         with:
           distribution: 'temurin'
-          java-version: 17
+          java-version: 19
           cache: 'maven'
 
       - name: Install aws cdk
