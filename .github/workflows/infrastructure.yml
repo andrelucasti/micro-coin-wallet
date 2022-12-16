@@ -5,7 +5,6 @@ on:
     branches:
       - main
 
-
 env:
   AWS_ACCESS_KEY_ID: ${{secrets.AWS_ACCESS_KEY_ID}}
   AWS_SECRET_ACCESS_KEY: ${{secrets.AWS_SECRET_ACCESS_KEY}}
@@ -16,7 +15,7 @@ env:
 jobs:
   wallet-manager-deploy:
     runs-on: ubuntu-20.04
-    name: Bootstrap & Deploy CDK Wallet Manager
+    name: Wallet Manager - Bootstrap & Deploy CDK
     steps:
 
       - name: Checkout
@@ -29,16 +28,20 @@ jobs:
            java-version: 19
            cache: 'maven'
 
-      - name: NPM install
+      - name: Install aws cdk
         run: npm install -g aws-cdk
 
-      - name: NPM bootstrap
+      - name: CDK bootstrap
         working-directory: wallet-manager/wallet-manager-aws-resources
         run: cdk bootstrap -c accountId=${{ env.AWS_ACCOUNT_ID }} -c region=${{ env.AWS_DEFAULT_REGION }}
 
+      - name: CDK Deploy
+        working-directory: wallet-manager/wallet-manager-aws-resources
+        run: cdk deploy -c accountId=${{ env.AWS_ACCOUNT_ID }} -c region=${{ env.AWS_DEFAULT_REGION }}
+
   wallet-transaction-deploy:
     runs-on: ubuntu-20.04
-    name: Bootstrap & Deploy CDK Wallet Transaction
+    name: Wallet Transaction - Bootstrap & Deploy CDK
     steps:
 
       - name: Checkout
@@ -51,12 +54,15 @@ jobs:
           java-version: 19
           cache: 'maven'
 
-      - name: NPM install
+      - name: Install aws cdk
         run: npm install -g aws-cdk
 
-      - name: NPM bootstrap
+      - name: CDK bootstrap
         working-directory: wallet-transaction/wallet-transaction-aws-resources
         run: cdk bootstrap -c accountId=${{ env.AWS_ACCOUNT_ID }} -c region=${{ env.AWS_DEFAULT_REGION }}
 
+      - name: CDK deploy
+        working-directory: wallet-transaction/wallet-transaction-aws-resources
+        run: cdk deploy -c accountId=${{ env.AWS_ACCOUNT_ID }} -c region=${{ env.AWS_DEFAULT_REGION }}
 
 
