@@ -8,7 +8,9 @@ import software.amazon.awscdk.StackProps;
 import software.constructs.Construct;
 
 public class WalletManagerStack extends Stack {
-    public WalletManagerStack(final Construct scope, final String id, final StackProps props) {
+    public WalletManagerStack(final Construct scope,
+                              final String id,
+                              final StackProps props) {
         super(scope, id, props);
 
         SNSStack snsStack = new SNSStack(this);

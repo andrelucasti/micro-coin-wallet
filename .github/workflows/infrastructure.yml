@@ -39,7 +39,10 @@ jobs:
         working-directory: wallet-manager/wallet-manager-aws-resources
         run: cdk deploy -c accountId=${{ env.AWS_ACCOUNT_ID }} -c region=${{ env.AWS_DEFAULT_REGION }}
 
+
   wallet-transaction-deploy:
+    needs:
+      - wallet-manager-deploy
     runs-on: ubuntu-20.04
     name: Wallet Transaction - Bootstrap & Deploy CDK
     steps:
