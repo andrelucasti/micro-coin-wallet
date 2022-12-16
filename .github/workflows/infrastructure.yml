@@ -43,7 +43,7 @@ jobs:
 
       - name: CDK Deploy
         working-directory: wallet-manager/wallet-manager-aws-resources
-        run: cdk deploy -c accountId=${{ env.AWS_ACCOUNT_ID }} -c region=${{ env.AWS_DEFAULT_REGION }}
+        run: cdk deploy -c accountId=${{ env.AWS_ACCOUNT_ID }} -c region=${{ env.AWS_DEFAULT_REGION }} --all
 
 
   wallet-transaction-deploy:
