@@ -41,8 +41,6 @@ jobs:
 
 
   wallet-transaction-deploy:
-    needs:
-      - wallet-manager-deploy
     runs-on: ubuntu-20.04
     name: Wallet Transaction - Bootstrap & Deploy CDK
     steps:
