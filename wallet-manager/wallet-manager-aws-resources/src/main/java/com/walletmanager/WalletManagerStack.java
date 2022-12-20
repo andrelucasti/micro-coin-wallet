@@ -8,15 +8,16 @@ import software.amazon.awscdk.StackProps;
 import software.constructs.Construct;
 
 public class WalletManagerStack extends Stack {
-    public WalletManagerStack(final Construct scope,
-                              final String id,
+    public WalletManagerStack(final String stackName,
+                              final Construct scope,
                               final StackProps props) {
-        super(scope, id, props);
 
-        SNSStack snsStack = new SNSStack(this);
+        super(scope, stackName, props);
+
+        SNSStack snsStack = new SNSStack("wallet-manager-sns-stack", scope, props);
         snsStack.execute();
 
-        RDSStack rdsStack = new RDSStack(this, props, "walletManagerDBSecret");
+        RDSStack rdsStack = new RDSStack("wallet-rds-resource-stack", scope, props, "walletManagerDBSecret");
         rdsStack.execute();
     }
 }

@@ -1,16 +1,18 @@
 package com.walletmanager.sns;
 
+import software.amazon.awscdk.Stack;
+import software.amazon.awscdk.StackProps;
 import software.amazon.awscdk.services.sns.Topic;
 import software.constructs.Construct;
-public class SNSStack {
-
-    private final Construct scope;
-    public SNSStack(Construct scope) {
-        this.scope = scope;
+public class SNSStack extends Stack {
+    public SNSStack(String stackName,
+                    Construct construct,
+                    StackProps stackProps) {
+        super(construct, stackName, stackProps);
     }
 
     public void execute(){
-        Topic.Builder.create(scope, "wallet-manager-portfolio")
+        Topic.Builder.create(this, "wallet-manager-portfolio")
                 .topicName("wallet-manager-portfolio")
                 .build();
     }

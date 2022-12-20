@@ -1,4 +1,4 @@
-package com.walletmanager.rds;
+package com.walletmanager.sns;
 
 import org.junit.jupiter.api.Test;
 import software.amazon.awscdk.App;
@@ -9,24 +9,23 @@ import software.amazon.awscdk.assertions.Template;
 
 import java.util.Map;
 
-class RDSStackTest {
+class SNSStackTest {
+
     @Test
-    void shouldCreateWalletDB() {
+    void shouldCreateWalletManagerTopic() {
         StackProps stackProps = StackProps.builder().env(getEnv("000000000000", "us-east-1"))
                 .build();
 
-        App app = new App();
-        RDSStack rdsStack = new RDSStack("WalletManagerRdsStack", app, stackProps, "walletManagerDBSecret");
-        rdsStack.execute();
+        SNSStack snsStack = new SNSStack("walletManagerTopic", new App(), stackProps);
+        snsStack.execute();
 
-        Template template = Template.fromStack(rdsStack);
-        template.hasResourceProperties("AWS::RDS::DBInstance", Map.of(
-                    "DBName", Match.exact("walletManagerDatabase"),
-                    "EngineVersion", "14")
+        Template template = Template.fromStack(snsStack);
 
+        template.hasResourceProperties("AWS::SNS::Topic", Map.of(
+                "TopicName", Match.exact("wallet-manager-portfolio"))
         );
-    }
 
+    }
 
     public static Environment getEnv(final String accountId,
                                      final String region){

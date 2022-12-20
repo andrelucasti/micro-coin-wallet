@@ -16,10 +16,12 @@ public class AwsApp {
 
         app.synth();
     }
-    private static void executeStacks(App app, String accountId, String region) {
+    private static void executeStacks(App app,
+                                      String accountId,
+                                      String region) {
 
-        new WalletManagerStack(app, "wallet-manager-aws-resource-stack",
-                    StackProps.builder().env(getEnv(accountId, region))
+        new WalletManagerStack("wallet-manager-resource-stack", app,
+                StackProps.builder().env(getEnv(accountId, region))
                             .build());
 
         app.synth();

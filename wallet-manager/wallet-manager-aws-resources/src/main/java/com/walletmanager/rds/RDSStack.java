@@ -12,7 +12,7 @@ import software.amazon.awssdk.services.secretsmanager.SecretsManagerClient;
 import software.amazon.awssdk.services.secretsmanager.model.GetSecretValueRequest;
 import software.constructs.Construct;
 
-public class RDSStack extends Stack{
+public class RDSStack extends Stack {
 
     private static final String RDS_ENGINE = "postgres";
     private static final String RDS_ENGINE_VERSION = "14";
@@ -21,10 +21,12 @@ public class RDSStack extends Stack{
     private static final String RDS_DB_TYPE = "db.t4g.micro";
     private final String secretName;
 
-    public RDSStack(final Construct scope,
+    public RDSStack(final String stackName,
+                    final Construct scope,
                     final StackProps props,
                     final String secretName) {
-        super(scope, "rdsStack", props);
+
+        super(scope, stackName, props);
         this.secretName = secretName;
 
     }
