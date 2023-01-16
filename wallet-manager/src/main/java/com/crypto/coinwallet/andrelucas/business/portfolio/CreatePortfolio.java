@@ -18,6 +18,8 @@ public class CreatePortfolio {
         this.asyncService = asyncService;
     }
 
+    //TODO should run rollback if happens an error at to send to Topic.
+    //TODO should run rollback if happens an error at to save and should not send to the topic.
     public void execute(Portfolio portfolio){
         portfolioRepository.save(portfolio);
 
