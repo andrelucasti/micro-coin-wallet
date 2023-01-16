@@ -9,14 +9,14 @@ import software.amazon.awscdk.assertions.Template;
 
 import java.util.Map;
 
-class SNSStackTest {
+class SnsStackTest {
 
     @Test
     void shouldCreateWalletManagerTopic() {
         StackProps stackProps = StackProps.builder().env(getEnv("000000000000", "us-east-1"))
                 .build();
 
-        SNSStack snsStack = new SNSStack("walletManagerTopic", new App(), stackProps);
+        SnsStack snsStack = new SnsStack("walletManagerTopic", new App(), stackProps);
         snsStack.execute();
 
         Template template = Template.fromStack(snsStack);

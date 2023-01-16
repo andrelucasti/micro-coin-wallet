@@ -4,8 +4,8 @@ import software.amazon.awscdk.Stack;
 import software.amazon.awscdk.StackProps;
 import software.amazon.awscdk.services.sns.Topic;
 import software.constructs.Construct;
-public class SNSStack extends Stack {
-    public SNSStack(String stackName,
+public class SnsStack extends Stack {
+    public SnsStack(String stackName,
                     Construct construct,
                     StackProps stackProps) {
         super(construct, stackName, stackProps);
