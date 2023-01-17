@@ -17,7 +17,7 @@ class SnsStackTest {
                 .build();
 
         SnsStack snsStack = new SnsStack("walletManagerTopic", new App(), stackProps);
-        snsStack.execute();
+        snsStack.create();
 
         Template template = Template.fromStack(snsStack);
 

@@ -22,7 +22,7 @@ public class EcrStack extends Stack {
         this.environment = environment;
     }
 
-    public void execute(){
+    public void create(){
         Repository repository = Repository.Builder.create(this, "wallet-manager-registry")
                 .repositoryName("wallet-manager")
                 .imageTagMutability(TagMutability.IMMUTABLE)

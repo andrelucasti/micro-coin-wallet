@@ -11,7 +11,7 @@ public class SnsStack extends Stack {
         super(construct, stackName, stackProps);
     }
 
-    public void execute(){
+    public void create(){
         Topic.Builder.create(this, "wallet-manager-portfolio")
                 .topicName("wallet-manager-portfolio")
                 .build();
