@@ -1,0 +1,60 @@
+name: Wallet Manager Pipeline
+
+on:
+  push:
+    branches:
+      - main
+
+env:
+  #AWS
+  AWS_ACCESS_KEY_ID: ${{secrets.AWS_ACCESS_KEY_ID}}
+  AWS_SECRET_ACCESS_KEY: ${{secrets.AWS_SECRET_ACCESS_KEY}}
+  AWS_DEFAULT_REGION: ${{secrets.AWS_REGION}}
+  AWS_ACCOUNT_ID: ${{secrets.AWS_ACCOUNT_ID}}
+  AWS_ECR_REPOSITORY: ${{ secrets.AWS_ECR_WALLET_MANAGER_REPOSITORY }}
+  
+  #APP
+  ENVIRONMENT: sandbox
+  CLUSTER_NAME: aws-resource-lab
+  APP_NAME: wallet-manager
+  IMAGE_TAG: ${{ github.sha }}
+
+
+jobs:
+  Build:
+    runs-on: ubuntu-20.04
+    name: Building the App
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Configure AWS Credentials
+        uses: aws-actions/configure-aws-credentials@v1
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: ${{ secrets.AWS_REGION }}
+
+      - name: ECR Login
+        id: aws-ecr-login
+        uses: aws-actions/amazon-ecr-login@v1
+
+      - name: Build Image to ECR
+        id: build-image
+        env:
+          ECR_REGISTRY: ${{ steps.aws-ecr-login.outputs.registry }}
+          ECR_REPOSITORY: ${{ env.AWS_ECR_REPOSITORY }}
+          ECR_IMAGE_TAG: ${{ env.IMAGE_TAG }}
+          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          AWS_REGION: ${{ secrets.AWS_REGION }}
+
+        run: |
+          docker build -t $ECR_REGISTRY/$ECR_REPOSITORY:$ECR_IMAGE_TAG .
+          echo "image=$ECR_REGISTRY/$ECR_REPOSITORY:$ECR_IMAGE_TAG" >> $GITHUB_OUTPUT
+
+      - name: Push Image to ECR
+        env:
+          ECR_REGISTRY: ${{ steps.aws-ecr-login.outputs.registry }}
+          ECR_REPOSITORY: ${{ env.AWS_ECR_REPOSITORY}}
+          ECR_IMAGE_TAG: ${{ env.IMAGE_TAG }}
+        run: docker push $ECR_REGISTRY/$ECR_REPOSITORY:$ECR_IMAGE_TAG
