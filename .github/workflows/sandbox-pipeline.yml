@@ -39,6 +39,7 @@ jobs:
         uses: aws-actions/amazon-ecr-login@v1
 
       - name: Build Image to ECR
+        working-directory: wallet-manager
         id: build-image
         env:
           ECR_REGISTRY: ${{ steps.aws-ecr-login.outputs.registry }}
