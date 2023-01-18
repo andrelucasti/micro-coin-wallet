@@ -140,7 +140,7 @@ public class EcsStack extends Stack {
                 .logConfiguration(CfnTaskDefinition.LogConfigurationProperty.builder()
                         .logDriver("awslogs")
                         .options(Map.of(
-                                "awslogs-group", logGroup.getLogGroupName(),
+                                "awslogs-group", "sandbox-aws-resource-lab-logs",
                                 "awslogs-region", "us-east-1",
                                 "awslogs-stream-prefix", "stream-".concat(environment.withResourceName(APP_NAME)),
                                 "awslogs-datetime-format", DATE_FORMAT
