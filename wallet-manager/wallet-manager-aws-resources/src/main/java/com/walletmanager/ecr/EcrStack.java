@@ -23,12 +23,12 @@ public class EcrStack extends Stack {
     }
 
     public void create(){
-        Repository repository = Repository.Builder.create(this, "wallet-manager-registry")
+        var repository = Repository.Builder.create(this, "wallet-manager-registry")
                 .repositoryName("wallet-manager")
                 .imageTagMutability(TagMutability.IMMUTABLE)
                 .build();
 
-        IRole ecsTaskExecutionRole =
+        var ecsTaskExecutionRole =
                 Role.fromRoleName(this, "ecsTaskExecutionRole", environment.value().concat("-").concat("aws-resource-ecsTaskExecutionRole"));
 
         repository.grantPull(ecsTaskExecutionRole);

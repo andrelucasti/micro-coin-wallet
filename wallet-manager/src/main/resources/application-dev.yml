@@ -1,11 +1,13 @@
 spring:
   datasource:
     hikari:
-      jdbc-url: jdbc:postgresql://localhost:54321/wallet-manager
+      jdbc-url: jdbc:postgresql://wallet-manager-database.cigpo7kgjqns.us-east-1.rds.amazonaws.com:5432/walletmanager
       pool-name: wallet-manager-hikari-pool
       driver-class-name: org.postgresql.Driver
-      username: wallet-manager
-      password: wallet-manager
+      username: ${username}
+      password: ${password}
+      minimum-idle: 20
+      connection-timeout: 2000
 
   flyway:
     enabled: true # This is not recommended to production environment, the best way is to have the migration step in pipeline
@@ -16,3 +18,5 @@ spring:
     aws:
       sns:
         enabled: true
+  config:
+    import: aws-secretsmanager:walletManagerDBSecret

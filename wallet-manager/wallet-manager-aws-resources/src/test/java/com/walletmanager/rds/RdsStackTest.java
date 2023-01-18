@@ -9,15 +9,15 @@ import software.amazon.awscdk.assertions.Template;
 
 import java.util.Map;
 
-class RDSStackTest {
+class RdsStackTest {
     @Test
     void shouldCreateWalletDB() {
         StackProps stackProps = StackProps.builder().env(getEnv("000000000000", "us-east-1"))
                 .build();
 
         App app = new App();
-        RDSStack rdsStack = new RDSStack("WalletManagerRdsStack", app, stackProps, "walletManagerDBSecret");
-        rdsStack.execute();
+        RdsStack rdsStack = new RdsStack(app, "WalletManagerRdsStack", stackProps, com.walletmanager.Environment.SANDBOX, "walletManagerDBSecret", "vpcName");
+        rdsStack.create();
 
         Template template = Template.fromStack(rdsStack);
         template.hasResourceProperties("AWS::RDS::DBInstance", Map.of(

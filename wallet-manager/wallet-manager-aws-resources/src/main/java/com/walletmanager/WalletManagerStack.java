@@ -3,7 +3,7 @@ package com.walletmanager;
 
 import com.walletmanager.ecr.EcrStack;
 import com.walletmanager.ecs.EcsStack;
-import com.walletmanager.sns.SnsStack;
+import com.walletmanager.rds.RdsStack;
 import software.amazon.awscdk.Stack;
 import software.amazon.awscdk.StackProps;
 import software.constructs.Construct;
