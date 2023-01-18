@@ -12,4 +12,4 @@ EXPOSE 9958
 EXPOSE 8929
 EXPOSE 8080
 
-ENTRYPOINT java -jar "/usr/src/app/application.jar"
+ENTRYPOINT java -jar --enable-preview "/usr/src/app/application.jar"
