@@ -1,8 +1,6 @@
 package com.walletmanager.ecs;
 
 import com.walletmanager.Environment;
-import software.amazon.awscdk.Arn;
-import software.amazon.awscdk.ArnComponents;
 import software.amazon.awscdk.Stack;
 import software.amazon.awscdk.StackProps;
 import software.amazon.awscdk.services.ec2.ISubnet;
@@ -182,16 +180,9 @@ public class EcsStack extends Stack {
                 .values(Collections.singletonList("*"))
                 .build();
 
-        var arnComponents = ArnComponents.builder()
-                .account(account)
-                .region(region)
-                .partition("aws")
-                .service("loadbalancer")
-                .resource(environment.withResourceName(APP_LB_NAME))
-                .build();
-
         var httpListener = ApplicationListener.fromLookup(this, "httpListener", ApplicationListenerLookupOptions.builder()
-                .loadBalancerArn(Arn.format(arnComponents))
+                .listenerPort(80)
+                .loadBalancerArn("arn:aws:elasticloadbalancing:us-east-1:040335195619:loadbalancer/app/sandbox-aws-resource-lab-alb/47325464f863cbce")
                 .build());
 
         return CfnListenerRule.Builder.create(this, "httpListenerRule")
