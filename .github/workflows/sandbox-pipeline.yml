@@ -80,5 +80,5 @@ jobs:
         run: npm install -g aws-cdk
   
       - name: Deploy app using cdk
-        working-directory: infrastructure
-        run: cdk deploy -c accountId=${{ env.AWS_ACCOUNT_ID }} -c region=${{ env.AWS_DEFAULT_REGION }} -c imageTag=${{ env.IMAGE_TAG }}  wallet-manager-resource-stack/wallet-manager-ecs-stack --require-approval never
+        working-directory: wallet-manager/wallet-manager-aws-resources
+        run: cdk deploy -c accountId=${{ env.AWS_ACCOUNT_ID }} -c region=${{ env.AWS_DEFAULT_REGION }} -c imageTag=${{ env.IMAGE_TAG }} wallet-manager-resource-stack/wallet-manager-ecs-stack --require-approval never
