@@ -1,7 +1,7 @@
 spring:
   datasource:
     hikari:
-      jdbc-url: jdbc:postgresql://wallet-manager-database.cigpo7kgjqns.us-east-1.rds.amazonaws.com:5432/walletmanager
+      jdbc-url: jdbc:postgresql://wallet-manager.cigpo7kgjqns.us-east-1.rds.amazonaws.com:5432/walletmanager
       pool-name: wallet-manager-hikari-pool
       driver-class-name: org.postgresql.Driver
       username: ${username}
