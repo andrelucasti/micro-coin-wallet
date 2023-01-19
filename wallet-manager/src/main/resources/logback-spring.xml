@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+    <include resource="org/springframework/boot/logging/logback/defaults.xml"/>
+    <include resource="org/springframework/boot/logging/logback/console-appender.xml"/>
+
+    <springProfile name="local">
+        <root level="debug">
+            <appender-ref ref="TEXT"/>
+        </root>
+    </springProfile>
+
+    <appender name="TEXT"  class="ch.qos.logback.core.ConsoleAppender">
+        <layout class="ch.qos.logback.classic.PatternLayout">
+            <pattern>
+                %cyan
+            </pattern>
+        </layout>
+    </appender>
+
+    <springProfile name="dev">
+        <root level="INFO">
+            <appender-ref ref="JSON"/>
+        </root>
+    </springProfile>
+    <springProfile name="dev">
+        <root level="WARN">
+            <appender-ref ref="JSON"/>
+        </root>
+    </springProfile>
+    <springProfile name="dev">
+        <root level="ERROR">
+            <appender-ref ref="JSON"/>
+        </root>
+    </springProfile>
+    <appender name="JSON" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder class="de.siegmar.logbackawslogsjsonencoder.AwsJsonLogEncoder"/>
+    </appender>
+
+
+</configuration>
