@@ -22,6 +22,6 @@ public class CreatePortfolio {
     //TODO should run rollback if happens an error at to save and should not send to the topic.
     public void execute(Portfolio portfolio){
         portfolioRepository.save(portfolio);
-        asyncService.execute(() ->  portfolioIntegration.send(portfolio));
+        asyncService.execute(() -> portfolioIntegration.send(portfolio));
     }
 }

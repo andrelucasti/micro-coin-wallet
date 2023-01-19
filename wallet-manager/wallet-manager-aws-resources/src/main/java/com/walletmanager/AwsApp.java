@@ -20,9 +20,13 @@ public class AwsApp {
                                       String accountId,
                                       String region) {
 
-        new WalletManagerStack("wallet-manager-resource-stack", app,
+        new WalletManagerAppStack("wallet-manager-resource-stack", app,
                 StackProps.builder().env(getEnv(accountId, region))
                             .build());
+
+        new WalletManagerInfrastructureStack("wallet-manager-infra-resource-stack", app,
+                StackProps.builder().env(getEnv(accountId, region))
+                        .build());
 
         app.synth();
     }
