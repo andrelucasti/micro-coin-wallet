@@ -26,7 +26,7 @@
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
       <module name="wallet-manager" options="-parameters --enable-preview" />
       <module name="wallet-manager-aws-resources" options="" />
-      <module name="wallet-transaction" options="-parameters" />
+      <module name="wallet-transaction" options="-parameters --enable-preview" />
       <module name="wallet-transaction-aws-resources" options="" />
     </option>
   </component>
