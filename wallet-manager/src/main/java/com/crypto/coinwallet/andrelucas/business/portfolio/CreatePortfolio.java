@@ -21,11 +21,7 @@ public class CreatePortfolio {
     //TODO should run rollback if happens an error at to send to Topic.
     //TODO should run rollback if happens an error at to save and should not send to the topic.
     public void execute(Portfolio portfolio){
-        var newPortfolio = portfolioRepository
-                .findByUserIdAndName(portfolio.userId(), portfolio.name())
-                .orElseThrow(PortfolioNotFoundException::new);
-
         portfolioRepository.save(portfolio);
-        asyncService.execute(() ->  portfolioIntegration.send(newPortfolio));
+        asyncService.execute(() ->  portfolioIntegration.send(portfolio));
     }
 }
