@@ -53,7 +53,7 @@ public class PortfolioRepositoryImpl implements PortfolioBusinessRepository {
 
     @Override
     public List<Portfolio> findBy(UUID userId) {
-        return null;
+        return portfolioCrudRepository.findByUserId(userId);
     }
 
     @Override

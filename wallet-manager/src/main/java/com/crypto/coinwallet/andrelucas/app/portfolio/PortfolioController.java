@@ -32,7 +32,7 @@ public class PortfolioController {
     }
 
     @GetMapping
-    public ResponseEntity<List<PortfolioResponse>> listAllPortfolioByUserId(@RequestHeader UUID userId){
+    public ResponseEntity<List<PortfolioResponse>> listAllPortfolioByUserId(@RequestHeader(name = "userId") final UUID userId){
         var portfolioResponses = fetchPortfolioByUserId.execute(userId)
                 .stream()
                 .map(portfolio -> new PortfolioResponse(portfolio.id(), portfolio.name(), portfolio.userId()))
