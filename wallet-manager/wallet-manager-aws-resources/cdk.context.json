@@ -79,5 +79,20 @@
   "security-group:account=040335195619:region=us-east-1:securityGroupId=sg-0c9e91540b58cf696": {
     "securityGroupId": "sg-0c9e91540b58cf696",
     "allowAllOutbound": false
+  },
+  "security-group:account=040335195619:region=us-east-1:securityGroupName=sandbox-ecsSecurityGroup:vpcId=vpc-01d239e801cb56f2c": {
+    "securityGroupId": "sg-0e41601999ffaa137",
+    "allowAllOutbound": false
+  },
+  "load-balancer-listener:account=040335195619:listenerPort=80:loadBalancerArn=arn$:aws:elasticloadbalancing:us-east-1:040335195619:loadbalancer/app/sandbox-wallet-manager-alb/8d13c6f05ad2a7ad:loadBalancerType=application:region=us-east-1": {
+    "listenerArn": "arn:aws:elasticloadbalancing:us-east-1:040335195619:listener/app/sandbox-wallet-manager-alb/8d13c6f05ad2a7ad/451ada2d51536110",
+    "listenerPort": 80,
+    "securityGroupIds": [
+      "sg-043120be73476aecc"
+    ]
+  },
+  "security-group:account=040335195619:region=us-east-1:securityGroupId=sg-043120be73476aecc": {
+    "securityGroupId": "sg-043120be73476aecc",
+    "allowAllOutbound": false
   }
 }

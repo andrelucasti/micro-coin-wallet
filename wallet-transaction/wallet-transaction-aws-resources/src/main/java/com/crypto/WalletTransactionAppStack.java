@@ -8,9 +8,9 @@ import software.amazon.awscdk.StackProps;
 import software.constructs.Construct;
 
 public class WalletTransactionAppStack extends Stack {
-    public WalletTransactionAppStack(@Nullable final Construct scope,
-                                     @Nullable final String id,
-                                     @Nullable final StackProps props) {
+    public WalletTransactionAppStack(final Construct scope,
+                                     final String id,
+                                     final StackProps props) {
 
         super(scope, id, props);
 

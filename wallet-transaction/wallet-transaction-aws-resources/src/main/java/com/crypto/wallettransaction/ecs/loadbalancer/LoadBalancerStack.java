@@ -42,9 +42,9 @@ public class LoadBalancerStack extends Stack {
     }
 
     public void create(){
-        IVpc vpc = Vpc.fromLookup(this, "aws-resources-vpc-stack", VpcLookupOptions.builder().vpcName(vpcName).isDefault(false).build());
+        IVpc vpc = Vpc.fromLookup(this, "vpn", VpcLookupOptions.builder().vpcName(vpcName).isDefault(false).build());
+        ISecurityGroup loadbalancerSecGroup = SecurityGroup.fromSecurityGroupId(this, "loadbalancerSecGroup", "sg-043120be73476aecc");
 
-        ISecurityGroup loadbalancerSecGroup = SecurityGroup.fromLookupByName(this, "loadbalancerSecGroup", environment.withResourceName("loadbalancerSecGroup"), vpc);
         ApplicationLoadBalancer applicationLoadBalancer = ApplicationLoadBalancer.Builder.create(this, "loadBalancer")
                 .loadBalancerName(environment.withResourceName(APP_LB_NAME))
                 .vpc(vpc)

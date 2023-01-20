@@ -7,6 +7,7 @@ import software.amazon.awscdk.StackProps;
 import software.constructs.Construct;
 
 public class WalletTransactionInfrastructureStack extends Stack {
+    private static final String VPC_ID = "vpc";
     private static final String VPC_NAME = "aws-resources-lab";
 
     public WalletTransactionInfrastructureStack(final Construct scope,

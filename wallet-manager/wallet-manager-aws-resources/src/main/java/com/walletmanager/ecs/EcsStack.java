@@ -57,10 +57,10 @@ public class EcsStack extends Stack {
     }
 
     public void create(){
-        var vpc = Vpc.fromLookup(this, "aws-resources-vpc-stack", VpcLookupOptions.builder().vpcName(vpcName).isDefault(false).build());
+        var vpc = Vpc.fromLookup(this, "vpn", VpcLookupOptions.builder().vpcName(vpcName).isDefault(false).build());
         var taskDefinition = getTaskDefinition();
         var cfnTargetGroup = createTargetGroup(vpc);
-        var ecsSecurityGroup = SecurityGroup.fromLookupByName(this, "ecsSecurityGroup", "ecsSecurityGroup", vpc);
+        var ecsSecurityGroup = SecurityGroup.fromSecurityGroupId(this, "ecsSecurityGroup", "sg-0e41601999ffaa137");
 
         var loadBalancerProperty = CfnService.LoadBalancerProperty.builder()
                 .containerName(environment.withResourceName(APP_NAME))
@@ -174,10 +174,12 @@ public class EcsStack extends Stack {
                 .targetGroupArn(cfnTargetGroup.getRef())
                 .type("forward")
                 .build();
+
         var ruleConditionProperty = CfnListenerRule.RuleConditionProperty.builder()
                 .field("path-pattern")
                 .values(Collections.singletonList("*"))
                 .build();
+
         var loadBalancerArn = "arn:aws:elasticloadbalancing:"
                 .concat(region)
                 .concat(":")
@@ -186,12 +188,15 @@ public class EcsStack extends Stack {
                 .concat("loadbalancer/app/")
                 .concat(environment.withResourceName(LoadBalancerStack.APP_LB_NAME))
                 .concat("/")
-                .concat("721d3dbfef84f02e");
+                .concat("8d13c6f05ad2a7ad");
 
+        System.out.println("loadBalancerArn: " + loadBalancerArn);
         var httpListener = ApplicationListener.fromLookup(this, "httpListener", ApplicationListenerLookupOptions.builder()
                 .listenerPort(80)
                 .loadBalancerArn(loadBalancerArn)
                 .build());
+
+        System.out.println("httpListener: " + httpListener.getListenerArn());
 
         return CfnListenerRule.Builder.create(this, "httpListenerRule")
                 .actions(Collections.singletonList(actionProperty))

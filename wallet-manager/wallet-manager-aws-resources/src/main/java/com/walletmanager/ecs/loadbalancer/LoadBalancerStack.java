@@ -4,7 +4,6 @@ import com.walletmanager.Environment;
 import software.amazon.awscdk.Duration;
 import software.amazon.awscdk.Stack;
 import software.amazon.awscdk.StackProps;
-import software.amazon.awscdk.services.ec2.CfnSecurityGroupIngress;
 import software.amazon.awscdk.services.ec2.ISecurityGroup;
 import software.amazon.awscdk.services.ec2.IVpc;
 import software.amazon.awscdk.services.ec2.SecurityGroup;
@@ -41,9 +40,9 @@ public class LoadBalancerStack extends Stack {
     }
 
     public void create(){
-        IVpc vpc = Vpc.fromLookup(this, "aws-resources-vpc-stack", VpcLookupOptions.builder().vpcName(vpcName).isDefault(false).build());
+        IVpc vpc = Vpc.fromLookup(this, "vpn", VpcLookupOptions.builder().vpcName(vpcName).isDefault(false).build());
+        ISecurityGroup loadbalancerSecGroup = SecurityGroup.fromSecurityGroupId(this, "loadbalancerSecGroup", "sg-043120be73476aecc");
 
-        ISecurityGroup loadbalancerSecGroup = SecurityGroup.fromLookupByName(this, "loadbalancerSecGroup", environment.withResourceName("loadbalancerSecGroup"), vpc);
         ApplicationLoadBalancer applicationLoadBalancer = ApplicationLoadBalancer.Builder.create(this, "loadBalancer")
                 .loadBalancerName(environment.withResourceName(APP_LB_NAME))
                 .vpc(vpc)
