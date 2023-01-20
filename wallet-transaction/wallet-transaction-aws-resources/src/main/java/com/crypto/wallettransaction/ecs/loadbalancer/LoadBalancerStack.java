@@ -52,11 +52,11 @@ public class LoadBalancerStack extends Stack {
                 .securityGroup(loadbalancerSecGroup)
                 .build();
 
-        IApplicationTargetGroup defaultAppTargetGroup = ApplicationTargetGroup.Builder.create(this, "defaultTargetGroup")
+        IApplicationTargetGroup targetGroup = ApplicationTargetGroup.Builder.create(this, "targetGroup")
                 .vpc(vpc)
                 .port(8929)
                 .protocol(ApplicationProtocol.HTTP)
-                .targetGroupName(environment.withResourceName("defaultTargetGroup"))
+                .targetGroupName(environment.withResourceName(APP_LB_NAME.concat("-").concat("targetGroup")))
                 .targetType(TargetType.IP)
                 .deregistrationDelay(Duration.seconds(5))
                 .healthCheck(HealthCheck.builder()
@@ -74,7 +74,7 @@ public class LoadBalancerStack extends Stack {
                         .build());
 
         httpListener.addTargetGroups("http-default-target-group", AddApplicationTargetGroupsProps.builder()
-                .targetGroups(Collections.singletonList(defaultAppTargetGroup))
+                .targetGroups(Collections.singletonList(targetGroup))
                 .build());
     }
 }

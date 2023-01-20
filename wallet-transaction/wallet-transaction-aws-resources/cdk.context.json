@@ -1,0 +1,45 @@
+{
+  "vpc-provider:account=040335195619:filter.isDefault=false:filter.tag:Name=sandbox-aws-resources-lab:region=us-east-1:returnAsymmetricSubnets=true": {
+    "vpcId": "vpc-01d239e801cb56f2c",
+    "vpcCidrBlock": "10.0.0.0/16",
+    "availabilityZones": [],
+    "subnetGroups": [
+      {
+        "name": "sandbox-isolateSubnet",
+        "type": "Isolated",
+        "subnets": [
+          {
+            "subnetId": "subnet-0dc4ccdaa1b419250",
+            "cidr": "10.0.128.0/18",
+            "availabilityZone": "us-east-1a",
+            "routeTableId": "rtb-03fcda91d8edf3ea7"
+          },
+          {
+            "subnetId": "subnet-038e75852cf644a76",
+            "cidr": "10.0.192.0/18",
+            "availabilityZone": "us-east-1b",
+            "routeTableId": "rtb-07363778719eb8232"
+          }
+        ]
+      },
+      {
+        "name": "sandbox-publicSubnet",
+        "type": "Public",
+        "subnets": [
+          {
+            "subnetId": "subnet-009eb34e6eb42ce8d",
+            "cidr": "10.0.0.0/18",
+            "availabilityZone": "us-east-1a",
+            "routeTableId": "rtb-075bf2347d698739f"
+          },
+          {
+            "subnetId": "subnet-057deaf8afbdf2e17",
+            "cidr": "10.0.64.0/18",
+            "availabilityZone": "us-east-1b",
+            "routeTableId": "rtb-0e3cbddb821d8edd8"
+          }
+        ]
+      }
+    ]
+  }
+}
