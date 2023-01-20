@@ -58,10 +58,10 @@ public class EcsStack extends Stack {
     }
 
     public void create(){
-        var vpc = Vpc.fromLookup(this, "aws-resources-vpc-stack", VpcLookupOptions.builder().vpcName(vpcName).isDefault(false).build());
+        var vpc = Vpc.fromLookup(this, "vpc", VpcLookupOptions.builder().vpcName(vpcName).isDefault(false).build());
         var taskDefinition = getTaskDefinition();
         var cfnTargetGroup = createTargetGroup(vpc);
-        var ecsSecurityGroup = SecurityGroup.fromLookupByName(this, "ecsSecurityGroup", "ecsSecurityGroup", vpc);
+        var ecsSecurityGroup = SecurityGroup.fromSecurityGroupId(this, "ecsSecurityGroup", "sg-0e41601999ffaa137");
 
         var loadBalancerProperty = CfnService.LoadBalancerProperty.builder()
                 .containerName(environment.withResourceName(APP_NAME))
