@@ -27,6 +27,7 @@ jobs:
         run: npm install -g aws-cdk
 
       - name: CDK bootstrap
+        working-directory: wallet-transaction/wallet-transaction-aws-resources
         run: cdk bootstrap -c accountId=${{ env.AWS_ACCOUNT_ID }} -c region=${{ env.AWS_DEFAULT_REGION }}
 
       - name: CDK deploy
