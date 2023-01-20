@@ -99,7 +99,7 @@ public class EcsStack extends Stack {
     }
 
     private static String getAccount(Construct scope) {
-        return scope.getNode().tryGetContext("account") == null ? "latest" : (String) scope.getNode().tryGetContext("account");
+        return scope.getNode().tryGetContext("accountId") == null ? "latest" : (String) scope.getNode().tryGetContext("account");
     }
 
     private static String getRegion(Construct scope) {
