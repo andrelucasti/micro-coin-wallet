@@ -24,6 +24,7 @@ public class WalletTransactionAppStack extends Stack {
 
         var environment = Environment.SANDBOX;
         var vpcName = environment.withResourceName(VPC_NAME);
-        new EcsStack(this, "wallet-transaction-ecs-stack", props, Environment.SANDBOX, vpcName);
+        new EcsStack(this, "wallet-transaction-ecs-stack", props, Environment.SANDBOX, vpcName)
+                .create();
     }
 }
