@@ -33,5 +33,5 @@ jobs:
       - name: CDK deploy
         working-directory: wallet-manager/wallet-manager-aws-resources
         run: |
-          cdk deploy -c accountId=${{ env.AWS_ACCOUNT_ID }} -c region=${{ env.AWS_DEFAULT_REGION }} wallet-manager-infra-resource-stack --require-approval never 
+          cdk deploy -c accountId=${{ env.AWS_ACCOUNT_ID }} -c region=${{ env.AWS_DEFAULT_REGION }} -all --require-approval never 
         
