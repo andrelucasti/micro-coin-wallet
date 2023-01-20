@@ -15,8 +15,9 @@ public class WalletManagerAppStack extends Stack {
         super(scope, stackName, props);
 
         var environment = Environment.SANDBOX;
+        var vpcName = environment.withResourceName(VPC_NAME);
 
-        new EcsStack(this, "wallet-manager-ecs-stack", props, environment, VPC_NAME)
+        new EcsStack(this, "wallet-manager-ecs-stack", props, environment, vpcName)
                 .create();
         new SnsStack(this, "wallet-manager-sns-stack", props)
                 .create();

@@ -14,10 +14,13 @@ public class WalletTransactionInfrastructureStack extends Stack {
                                                 final StackProps props) {
         super(scope, id, props);
 
+        var environment = Environment.SANDBOX;
+        var vpcName = environment.withResourceName(VPC_NAME);
+
         new EcrStack(this, "wallet-transaction-repository", props, Environment.SANDBOX)
                 .create();
 
-        new LoadBalancerStack(this, "wallet-transaction-alb-stack", props, Environment.SANDBOX, VPC_NAME)
+        new LoadBalancerStack(this, "wallet-transaction-alb-stack", props, Environment.SANDBOX, vpcName)
                 .create();
     }
 }

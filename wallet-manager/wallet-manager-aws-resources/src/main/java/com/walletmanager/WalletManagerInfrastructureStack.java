@@ -17,11 +17,12 @@ public class WalletManagerInfrastructureStack extends Stack {
         super(scope, stackName, props);
 
         var environment = Environment.SANDBOX;
+        var vpcName = environment.withResourceName(VPC_NAME);
 
         new EcrStack(this, "wallet-manager-repository", props, environment)
                 .create();
 
-        new LoadBalancerStack(this, "wallet-manager-alb-stack", props, environment, VPC_NAME)
+        new LoadBalancerStack(this, "wallet-manager-alb-stack", props, environment, vpcName)
                 .create();
     }
 }
