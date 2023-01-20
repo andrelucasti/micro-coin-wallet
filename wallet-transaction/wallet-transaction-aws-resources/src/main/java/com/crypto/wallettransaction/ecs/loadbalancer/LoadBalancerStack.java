@@ -56,7 +56,7 @@ public class LoadBalancerStack extends Stack {
                 .vpc(vpc)
                 .port(8929)
                 .protocol(ApplicationProtocol.HTTP)
-                .targetGroupName(environment.withResourceName(APP_LB_NAME.concat("-").concat("targetGroup")))
+                .targetGroupName(environment.withResourceName("wt-targetGroup"))
                 .targetType(TargetType.IP)
                 .deregistrationDelay(Duration.seconds(5))
                 .healthCheck(HealthCheck.builder()
