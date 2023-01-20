@@ -1,7 +1,8 @@
-package com.walletmanager.ecs;
+package com.crypto.wallettransaction.ecs;
 
-import com.walletmanager.Environment;
-import com.walletmanager.ecs.loadbalancer.LoadBalancerStack;
+
+import com.crypto.Environment;
+import com.crypto.wallettransaction.ecs.loadbalancer.LoadBalancerStack;
 import software.amazon.awscdk.Stack;
 import software.amazon.awscdk.StackProps;
 import software.amazon.awscdk.services.ec2.ISubnet;
@@ -25,9 +26,9 @@ import java.util.List;
 import java.util.Map;
 
 public class EcsStack extends Stack {
-    private static final String REPOSITORY_NAME = "wallet-manager";
+    private static final String REPOSITORY_NAME = "wallet-transaction";
     private static final String CLUSTER_NAME = "aws-resource-lab";
-    private static final String APP_NAME = "wallet-manager";
+    private static final String APP_NAME = "wallet-transaction";
     private static final String DATE_FORMAT = "%Y-%m-%dT%H:%M:%S.%f%z";
     private static final Number TASK_DEF_CPU = 256;
     private static final Number TASK_DEF_MEMORY = 1024;
@@ -178,6 +179,7 @@ public class EcsStack extends Stack {
                 .field("path-pattern")
                 .values(Collections.singletonList("*"))
                 .build();
+
         var loadBalancerArn = "arn:aws:elasticloadbalancing:"
                 .concat(region)
                 .concat(":")

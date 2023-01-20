@@ -16,7 +16,7 @@ class SnsStackTest {
         StackProps stackProps = StackProps.builder().env(getEnv("000000000000", "us-east-1"))
                 .build();
 
-        SnsStack snsStack = new SnsStack("walletManagerTopic", new App(), stackProps);
+        SnsStack snsStack = new SnsStack(new App(), "walletManagerTopic", stackProps);
         snsStack.create();
 
         Template template = Template.fromStack(snsStack);

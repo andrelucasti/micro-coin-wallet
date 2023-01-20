@@ -5,8 +5,7 @@ import software.amazon.awscdk.StackProps;
 import software.constructs.Construct;
 public class SnsStack extends Stack {
     private final PortfolioTopic portfolioTopic;
-    public SnsStack(String stackName,
-                    Construct construct,
+    public SnsStack(Construct construct, String stackName,
                     StackProps stackProps) {
         super(construct, stackName, stackProps);
 

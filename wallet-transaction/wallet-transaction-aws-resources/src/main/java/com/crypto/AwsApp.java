@@ -1,6 +1,5 @@
 package com.crypto;
 
-import com.crypto.wallettransaction.WalletTransactionStack;
 import software.amazon.awscdk.App;
 import software.amazon.awscdk.Environment;
 import software.amazon.awscdk.StackProps;
@@ -18,9 +17,14 @@ public class AwsApp {
         app.synth();
     }
     private static void executeStacks(App app, String accountId, String region) {
-        new WalletTransactionStack(app, "wallet-transaction-stack",
+
+        new WalletTransactionAppStack(app, "wallet-transaction-resource-stack",
                     StackProps.builder().env(getEnv(accountId, region))
                             .build());
+
+        new WalletTransactionInfrastructureStack(app, "wallet-transaction-infra-resource-stack",
+                StackProps.builder().env(getEnv(accountId, region))
+                        .build());
         app.synth();
     }
 

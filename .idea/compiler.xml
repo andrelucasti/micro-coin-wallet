@@ -18,7 +18,7 @@
       <module name="wallet-manager" target="19" />
       <module name="wallet-manager-aws-resources" target="19" />
       <module name="wallet-transaction" target="19" />
-      <module name="wallet-transaction-aws-resources" target="1.8" />
+      <module name="wallet-transaction-aws-resources" target="19" />
     </bytecodeTargetLevel>
   </component>
   <component name="JavacSettings">

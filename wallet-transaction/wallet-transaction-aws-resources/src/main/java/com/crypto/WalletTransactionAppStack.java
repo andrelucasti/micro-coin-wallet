@@ -1,20 +1,20 @@
-package com.crypto.wallettransaction;
+package com.crypto;
 
-import com.crypto.wallettransaction.sqs.SQSStack;
+import com.crypto.wallettransaction.sqs.SqsStack;
 import com.crypto.wallettransaction.sqs.queues_subscribed.QueuesSubscribedStack;
 import org.jetbrains.annotations.Nullable;
 import software.amazon.awscdk.Stack;
 import software.amazon.awscdk.StackProps;
 import software.constructs.Construct;
 
-public class WalletTransactionStack extends Stack {
-    public WalletTransactionStack(@Nullable final Construct scope,
-                                  @Nullable final String id,
-                                  @Nullable final StackProps props) {
+public class WalletTransactionAppStack extends Stack {
+    public WalletTransactionAppStack(@Nullable final Construct scope,
+                                     @Nullable final String id,
+                                     @Nullable final StackProps props) {
 
         super(scope, id, props);
 
-        SQSStack sqsStack = new SQSStack(
+        SqsStack sqsStack = new SqsStack(
                 new QueuesSubscribedStack(this, props)
         );
 

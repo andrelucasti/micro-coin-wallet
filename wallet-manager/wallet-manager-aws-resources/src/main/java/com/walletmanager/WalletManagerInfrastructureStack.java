@@ -3,6 +3,7 @@ package com.walletmanager;
 
 import com.walletmanager.ecr.EcrStack;
 import com.walletmanager.ecs.EcsStack;
+import com.walletmanager.ecs.loadbalancer.LoadBalancerStack;
 import com.walletmanager.sns.SnsStack;
 import software.amazon.awscdk.Stack;
 import software.amazon.awscdk.StackProps;
@@ -19,7 +20,8 @@ public class WalletManagerInfrastructureStack extends Stack {
 
         new EcrStack(this, "wallet-manager-repository", props, environment)
                 .create();
-        new SnsStack("wallet-manager-sns-stack", this, props)
+
+        new LoadBalancerStack(this, "wallet-manager-alb-stack", props, environment, VPC_NAME)
                 .create();
     }
 }

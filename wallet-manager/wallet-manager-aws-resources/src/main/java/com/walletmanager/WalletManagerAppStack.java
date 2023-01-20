@@ -2,6 +2,7 @@ package com.walletmanager;
 
 
 import com.walletmanager.ecs.EcsStack;
+import com.walletmanager.sns.SnsStack;
 import software.amazon.awscdk.Stack;
 import software.amazon.awscdk.StackProps;
 import software.constructs.Construct;
@@ -16,6 +17,8 @@ public class WalletManagerAppStack extends Stack {
         var environment = Environment.SANDBOX;
 
         new EcsStack(this, "wallet-manager-ecs-stack", props, environment, VPC_NAME)
+                .create();
+        new SnsStack(this, "wallet-manager-sns-stack", props)
                 .create();
     }
 }
