@@ -1,4 +1,4 @@
-name: Wallet Transaction Pipeline
+name: Wallet Manager Pipeline
 
 on:
   push:
@@ -12,7 +12,7 @@ env:
   AWS_DEFAULT_REGION: ${{secrets.AWS_REGION}}
   AWS_ACCOUNT_ID: ${{secrets.AWS_ACCOUNT_ID}}
   AWS_ECR_REPOSITORY: ${{ secrets.AWS_ECR_WALLET_TRANSACTION_REPOSITORY }}
-  
+
   #APP
   ENVIRONMENT: sandbox
   CLUSTER_NAME: aws-resource-lab
@@ -21,6 +21,31 @@ env:
 
 
 jobs:
+  Resources:
+    runs-on: ubuntu-20.04
+    name: Building Resources
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Set up JDK
+        uses: actions/setup-java@v3
+        with:
+          distribution: 'temurin'
+          java-version: 19
+          cache: 'maven'
+
+      - name: Install aws cdk
+        run: npm install -g aws-cdk
+
+      - name: Bootstrap
+        working-directory: wallet-transaction/wallet-transaction-aws-resources
+        run: cdk bootstrap -c accountId=040335195619 -c region=us-east-1
+
+      - name: Creating queues
+        working-directory: wallet-transaction/wallet-transaction-aws-resources
+        run: |
+          cdk deploy -c accountId=${{ env.AWS_ACCOUNT_ID }} -c region=${{ env.AWS_DEFAULT_REGION }} wallet-transaction-resource-stack/wallet-transaction-sqs-stack --require-approval never
+
   Build:
     runs-on: ubuntu-20.04
     name: Building the App
@@ -59,26 +84,28 @@ jobs:
           ECR_REPOSITORY: ${{ env.AWS_ECR_REPOSITORY}}
           ECR_IMAGE_TAG: ${{ env.IMAGE_TAG }}
         run: docker push $ECR_REGISTRY/$ECR_REPOSITORY:$ECR_IMAGE_TAG
-          
+
   Deploy:
     runs-on: ubuntu-20.04
     name: Deploy the App
     needs:
       - Build
-    
+      - Resources
+
     steps:
       - uses: actions/checkout@v3
-  
+
       - name: Set up JDK
         uses: actions/setup-java@v3
         with:
           distribution: 'temurin'
           java-version: 19
           cache: 'maven'
-  
+
       - name: Install aws cdk
         run: npm install -g aws-cdk
-  
+
       - name: Deploy app using cdk
         working-directory: wallet-transaction/wallet-transaction-aws-resources
-        run: cdk deploy -c accountId=${{ env.AWS_ACCOUNT_ID }} -c region=${{ env.AWS_DEFAULT_REGION }} -c imageTag=${{ env.IMAGE_TAG }} wallet-transaction-resource-stack/wallet-transaction-ecs-stack --require-approval never
+        run: |
+          cdk deploy -c accountId=${{ env.AWS_ACCOUNT_ID }} -c region=${{ env.AWS_DEFAULT_REGION }} -c imageTag=${{ env.IMAGE_TAG }} wallet-transaction-resource-stack/wallet-transaction-ecs-stack --require-approval never
