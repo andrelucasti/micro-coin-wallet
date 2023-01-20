@@ -186,7 +186,7 @@ public class EcsStack extends Stack {
                 .concat("loadbalancer/app/")
                 .concat(environment.withResourceName(LoadBalancerStack.APP_LB_NAME))
                 .concat("/")
-                .concat("47325464f863cbce");
+                .concat("721d3dbfef84f02e");
 
         var httpListener = ApplicationListener.fromLookup(this, "httpListener", ApplicationListenerLookupOptions.builder()
                 .listenerPort(80)
