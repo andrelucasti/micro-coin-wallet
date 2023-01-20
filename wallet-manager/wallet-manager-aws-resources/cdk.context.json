@@ -68,5 +68,16 @@
   "security-group:account=040335195619:region=us-east-1:securityGroupName=sandbox-loadbalancerSecGroup:vpcId=vpc-01d239e801cb56f2c": {
     "securityGroupId": "sg-0c9e91540b58cf696",
     "allowAllOutbound": false
+  },
+  "load-balancer-listener:account=040335195619:listenerPort=80:loadBalancerArn=arn$:aws:elasticloadbalancing:us-east-1:040335195619:loadbalancer/app/sandbox-wallet-manager-alb/721d3dbfef84f02e:loadBalancerType=application:region=us-east-1": {
+    "listenerArn": "arn:aws:elasticloadbalancing:us-east-1:040335195619:listener/app/sandbox-wallet-manager-alb/721d3dbfef84f02e/173327016ce4fb61",
+    "listenerPort": 80,
+    "securityGroupIds": [
+      "sg-0c9e91540b58cf696"
+    ]
+  },
+  "security-group:account=040335195619:region=us-east-1:securityGroupId=sg-0c9e91540b58cf696": {
+    "securityGroupId": "sg-0c9e91540b58cf696",
+    "allowAllOutbound": false
   }
 }
