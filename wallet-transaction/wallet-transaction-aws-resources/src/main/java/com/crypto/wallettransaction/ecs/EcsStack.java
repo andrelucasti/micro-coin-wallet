@@ -49,7 +49,7 @@ public class EcsStack extends Stack {
 
         super(scope, id, props);
 
-        this.vpcName = environment.withResourceName(vpcName);
+        this.vpcName = vpcName;
         this.environment = environment;
 
         this.account = getAccount(scope);
