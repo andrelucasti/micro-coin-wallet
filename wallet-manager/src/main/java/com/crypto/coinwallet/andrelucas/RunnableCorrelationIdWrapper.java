@@ -17,6 +17,7 @@ public class RunnableCorrelationIdWrapper implements Runnable {
 
     @Override
     public void run() {
+        Thread.currentThread().setName("runnableCorrelationIdWrapper-");
         correlationIdResolver.setCurrent(currentCorrelationId);
         delegate.run();
     }
