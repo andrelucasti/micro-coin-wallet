@@ -190,13 +190,10 @@ public class EcsStack extends Stack {
                 .concat("/")
                 .concat("8d13c6f05ad2a7ad");
 
-        System.out.println("loadBalancerArn: " + loadBalancerArn);
         var httpListener = ApplicationListener.fromLookup(this, "httpListener", ApplicationListenerLookupOptions.builder()
                 .listenerPort(80)
                 .loadBalancerArn(loadBalancerArn)
                 .build());
-
-        System.out.println("httpListener: " + httpListener.getListenerArn());
 
         return CfnListenerRule.Builder.create(this, "httpListenerRule")
                 .actions(Collections.singletonList(actionProperty))

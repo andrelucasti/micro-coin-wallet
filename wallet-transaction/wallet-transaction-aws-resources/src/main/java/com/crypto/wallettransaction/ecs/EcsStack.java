@@ -100,7 +100,7 @@ public class EcsStack extends Stack {
     }
 
     private static String getAccount(Construct scope) {
-        return scope.getNode().tryGetContext("account") == null ? "latest" : (String) scope.getNode().tryGetContext("account");
+        return scope.getNode().tryGetContext("accountId") == null ? "latest" : (String) scope.getNode().tryGetContext("accountId");
     }
 
     private static String getRegion(Construct scope) {
@@ -190,10 +190,14 @@ public class EcsStack extends Stack {
                 .concat("/")
                 .concat("bf529d6df4c57534");
 
+        System.out.println(loadBalancerArn);
+
         var httpListener = ApplicationListener.fromLookup(this, "httpListener", ApplicationListenerLookupOptions.builder()
                 .listenerPort(80)
                 .loadBalancerArn(loadBalancerArn)
                 .build());
+
+        System.out.println(httpListener);
 
         return CfnListenerRule.Builder.create(this, "httpListenerRule")
                 .actions(Collections.singletonList(actionProperty))
