@@ -64,5 +64,9 @@
   "security-group:account=040335195619:region=us-east-1:securityGroupId=sg-0f8c7ad86a2aca250": {
     "securityGroupId": "sg-0f8c7ad86a2aca250",
     "allowAllOutbound": false
+  },
+  "security-group:account=040335195619:region=us-east-1:securityGroupName=sandbox-loadbalancerSecGroup:vpcId=vpc-01d239e801cb56f2c": {
+    "securityGroupId": "sg-0c9e91540b58cf696",
+    "allowAllOutbound": false
   }
 }
