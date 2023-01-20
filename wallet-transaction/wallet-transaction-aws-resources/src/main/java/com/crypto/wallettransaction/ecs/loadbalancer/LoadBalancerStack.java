@@ -6,6 +6,7 @@ import software.amazon.awscdk.Duration;
 import software.amazon.awscdk.Stack;
 import software.amazon.awscdk.StackProps;
 import software.amazon.awscdk.services.ec2.CfnSecurityGroupIngress;
+import software.amazon.awscdk.services.ec2.ISecurityGroup;
 import software.amazon.awscdk.services.ec2.IVpc;
 import software.amazon.awscdk.services.ec2.SecurityGroup;
 import software.amazon.awscdk.services.ec2.Vpc;
@@ -43,24 +44,12 @@ public class LoadBalancerStack extends Stack {
     public void create(){
         IVpc vpc = Vpc.fromLookup(this, "aws-resources-vpc-stack", VpcLookupOptions.builder().vpcName(vpcName).isDefault(false).build());
 
-        SecurityGroup securityGroup = SecurityGroup.Builder.create(this, "loadbalancerSecGroup")
-                .securityGroupName(environment.withResourceName("loadbalancerSecGroup"))
-                .description("Public access to the load balancer")
-                .vpc(vpc)
-                .build();
-
-        CfnSecurityGroupIngress.Builder.create(this, "ingressToLoadBalancer")
-                .groupId(securityGroup.getSecurityGroupId())
-                .cidrIp("0.0.0.0/0")
-                .ipProtocol("-1")
-                .build();
-
-
+        ISecurityGroup loadbalancerSecGroup = SecurityGroup.fromLookupByName(this, "loadbalancerSecGroup", environment.withResourceName("loadbalancerSecGroup"), vpc);
         ApplicationLoadBalancer applicationLoadBalancer = ApplicationLoadBalancer.Builder.create(this, "loadBalancer")
                 .loadBalancerName(environment.withResourceName(APP_LB_NAME))
                 .vpc(vpc)
                 .internetFacing(true)
-                .securityGroup(securityGroup)
+                .securityGroup(loadbalancerSecGroup)
                 .build();
 
         IApplicationTargetGroup defaultAppTargetGroup = ApplicationTargetGroup.Builder.create(this, "defaultTargetGroup")
