@@ -34,4 +34,5 @@ jobs:
         working-directory: wallet-transaction/wallet-transaction-aws-resources
         run: |
           cdk deploy -c accountId=${{ env.AWS_ACCOUNT_ID }} -c region=${{ env.AWS_DEFAULT_REGION }} wallet-transaction-infra-resource-stack --require-approval never 
-        
+          cdk deploy -c accountId=${{ env.AWS_ACCOUNT_ID }} -c region=${{ env.AWS_DEFAULT_REGION }} wallet-transaction-infra-resource-stack/wallet-transaction-repository --require-approval never
+          cdk deploy -c accountId=${{ env.AWS_ACCOUNT_ID }} -c region=${{ env.AWS_DEFAULT_REGION }} wallet-transaction-infra-resource-stack/wallet-transaction-alb-stack  --require-approval never
