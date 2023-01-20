@@ -44,7 +44,7 @@ jobs:
       - name: Creating queues
         working-directory: wallet-transaction/wallet-transaction-aws-resources
         run: |
-          cdk deploy -c accountId=${{ env.AWS_ACCOUNT_ID }} -c region=${{ env.AWS_DEFAULT_REGION }} wallet-transaction-resource-stack/wallet-transaction-resource-stack --require-approval never
+          cdk deploy -c accountId=${{ env.AWS_ACCOUNT_ID }} -c region=${{ env.AWS_DEFAULT_REGION }} wallet-transaction-resource-stack --require-approval never
 
   Build:
     runs-on: ubuntu-20.04
