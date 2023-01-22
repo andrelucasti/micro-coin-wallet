@@ -16,7 +16,7 @@
     </appender>
 
     <springProfile name="dev">
-        <root level="DEBUG">
+        <root level="ERROR">
             <appender-ref ref="JSON"/>
         </root>
     </springProfile>

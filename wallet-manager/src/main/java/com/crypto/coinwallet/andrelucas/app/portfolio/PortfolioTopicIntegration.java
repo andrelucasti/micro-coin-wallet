@@ -39,7 +39,7 @@ public class PortfolioTopicIntegration implements PortfolioIntegration {
             log.info(String.format("Sending message to topic - %s portfolioId %s", topicName, portfolio.id()));
             snsTemplate.convertAndSend(topicName, portfolioIntegrationDTO, Map.of("correlationId", correlationId));
         } catch (Exception e) {
-          String errorMsg = String.format("Got error to send the portfolio %s  to topic - %s",
+          String errorMsg = String.format("Got error to send the portfolio %s to topic - %s",
                   portfolio.id(),
                   topicName);
 
