@@ -36,11 +36,7 @@ jobs:
   
       - name: Install aws cdk
         run: npm install -g aws-cdk
-        
-      - name: Bootstrap
-        working-directory: wallet-manager/wallet-manager-aws-resources
-        run: cdk bootstrap -c accountId=040335195619 -c region=us-east-1
-        
+          
       - name: Creating SNS
         working-directory: wallet-manager/wallet-manager-aws-resources
         run: | 
