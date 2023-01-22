@@ -41,5 +41,16 @@
         ]
       }
     ]
+  },
+  "load-balancer-listener:account=040335195619:listenerPort=80:loadBalancerArn=arn$:aws:elasticloadbalancing:us-east-1:040335195619:loadbalancer/app/sandbox-wallet-transaction-alb/bf529d6df4c57534:loadBalancerType=application:region=us-east-1": {
+    "listenerArn": "arn:aws:elasticloadbalancing:us-east-1:040335195619:listener/app/sandbox-wallet-transaction-alb/bf529d6df4c57534/5dee7fc6406455e8",
+    "listenerPort": 80,
+    "securityGroupIds": [
+      "sg-043120be73476aecc"
+    ]
+  },
+  "security-group:account=040335195619:region=us-east-1:securityGroupId=sg-043120be73476aecc": {
+    "securityGroupId": "sg-043120be73476aecc",
+    "allowAllOutbound": false
   }
 }
