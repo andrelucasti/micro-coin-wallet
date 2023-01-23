@@ -21,8 +21,6 @@ public class AsyncCorrelationIdInterceptor implements MessageInterceptor<Object>
 
     @Override
     public Message<Object> intercept(Message<Object> message) {
-        log.info(message.toString());
-
         try{
             var messageAttributes = objectMapper.readTree(message.getPayload().toString()).get("MessageAttributes");
             var correlationId = messageAttributes.get("correlationId").get("Value");
