@@ -1,4 +1,4 @@
-package com.crypto.coinwallet.andrelucas;
+package com.crypto.coinwallet.andrelucas.configuration.correlationId;
 
 import lombok.extern.slf4j.Slf4j;
 import org.slf4j.MDC;
