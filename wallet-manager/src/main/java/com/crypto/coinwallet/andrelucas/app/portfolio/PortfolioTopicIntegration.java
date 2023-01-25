@@ -6,12 +6,10 @@ import com.crypto.coinwallet.andrelucas.business.portfolio.Portfolio;
 import com.crypto.coinwallet.andrelucas.business.portfolio.PortfolioIntegration;
 import io.awspring.cloud.sns.core.SnsTemplate;
 import lombok.extern.slf4j.Slf4j;
-import org.slf4j.MDC;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import java.util.Map;
-import java.util.UUID;
 
 @Slf4j
 @Service
@@ -34,10 +32,12 @@ public class PortfolioTopicIntegration implements PortfolioIntegration {
         var portfolioIntegrationDTO = new PortfolioIntegrationDTO(portfolio.id(), portfolio.name());
 
         try {
+            log.info(String.format("Current thread is virtual? : %s", Thread.currentThread().isVirtual()));
             var correlationId = correlationIdResolver.getCorrelationId();
 
             log.info(String.format("Sending message to topic - %s portfolioId %s", topicName, portfolio.id()));
             snsTemplate.convertAndSend(topicName, portfolioIntegrationDTO, Map.of("correlationId", correlationId.toString()));
+
         } catch (Exception e) {
           String errorMsg = String.format("Got error to send the portfolio %s to topic - %s",
                   portfolio.id(),

@@ -2,12 +2,10 @@ package com.crypto.coinwallet.andrelucas.business;
 
 import com.crypto.coinwallet.andrelucas.CorrelationIdResolver;
 import com.crypto.coinwallet.andrelucas.RunnableCorrelationIdWrapper;
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import java.util.concurrent.ExecutorService;
 
-@Slf4j
 @Service
 public class AsyncService {
     private final ExecutorService executorVirtualService;
@@ -19,10 +17,12 @@ public class AsyncService {
         this.correlationIdResolver = correlationIdResolver;
     }
 
-    public void execute(final Runnable runnable){
-        var runnableCorrelationIdWrapper = new RunnableCorrelationIdWrapper(runnable, correlationIdResolver);
+    public void execute(final String serviceName, final Runnable runnable){
+        var runnableCorrelationIdWrapper =
+            new RunnableCorrelationIdWrapper(runnable, correlationIdResolver, serviceName);
 
-        Thread.currentThread().setName("asyncService-");
         executorVirtualService.submit(runnableCorrelationIdWrapper);
     }
 }
+
+

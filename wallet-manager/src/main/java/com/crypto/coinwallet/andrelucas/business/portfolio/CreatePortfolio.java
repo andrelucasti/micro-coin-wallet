@@ -2,6 +2,7 @@ package com.crypto.coinwallet.andrelucas.business.portfolio;
 
 import com.crypto.coinwallet.andrelucas.business.AsyncService;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
 public class CreatePortfolio {
@@ -18,17 +19,14 @@ public class CreatePortfolio {
         this.asyncService = asyncService;
     }
 
-    //TODO should run rollback if happens an error at to send to Topic.
-    //TODO should run rollback if happens an error at to save and should not send to the topic.
+    @Transactional
     public void execute(Portfolio portfolio){
         portfolioRepository.save(portfolio);
 
-        try{
-            var newPortfolio = portfolioRepository.findByUserIdAndName(portfolio.userId(), portfolio.name())
-                    .orElseThrow(PortfolioNotFoundException::new);
-            asyncService.execute(() -> portfolioIntegration.send(newPortfolio));
-        } catch (Exception e){
-            throw new RuntimeException();
-        }
+        var newPortfolio = portfolioRepository.findByUserIdAndName(portfolio.userId(), portfolio.name())
+                .orElseThrow(PortfolioNotFoundException::new);
+
+        asyncService.execute("sendPortfolioToTopic", () -> portfolioIntegration.send(newPortfolio));
     }
 }
+
