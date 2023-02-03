@@ -19,3 +19,12 @@ spring:
         enabled: true
   config:
     import: aws-secretsmanager:walletManagerDBSecret
+
+
+management:
+  metrics:
+    export:
+      cloudwatch:
+        enabled: true
+        namespace: "Wallet Manager"
+        step: 1m
