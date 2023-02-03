@@ -6,7 +6,6 @@ import com.crypto.coinwallet.andrelucas.thirdparty.walletManager.ConsumerExcepti
 import com.fasterxml.jackson.databind.ObjectMapper;
 import io.awspring.cloud.sqs.annotation.SqsListener;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.messaging.Message;
 import org.springframework.messaging.handler.annotation.MessageExceptionHandler;
 import org.springframework.stereotype.Service;
 
@@ -39,3 +38,4 @@ public class PortfolioConsumer {
         log.error("handlerException", e);
     }
 }
+

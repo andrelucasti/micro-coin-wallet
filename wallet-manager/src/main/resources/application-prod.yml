@@ -5,9 +5,3 @@ spring:
     active: local
 server:
   port: 9882
-
-management:
-  endpoints:
-    web:
-      exposure:
-        include: '*'
