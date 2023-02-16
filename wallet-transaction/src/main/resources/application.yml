@@ -1,16 +1,18 @@
 spring:
   application:
-    name: wallet-manager
+    name: wallet-transaction
   profiles:
     active: dev
 server:
   port: 8929
 
 management:
-  endpoints:
-    web:
-      exposure:
-        include: '*'
+  metrics:
+    export:
+      cloudwatch:
+        enabled: true
+        namespace: "WalletTransaction"
+        step: 1m
 
 
 consumer:
