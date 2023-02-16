@@ -7,10 +7,12 @@ server:
   port: 8929
 
 management:
-  endpoints:
-    web:
-      exposure:
-        include: '*'
+  metrics:
+    export:
+      cloudwatch:
+        enabled: true
+        namespace: "WalletManager"
+        step: 1m
 
 
 integration:
