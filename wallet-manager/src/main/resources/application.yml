@@ -13,6 +13,7 @@ management:
         enabled: true
         namespace: "WalletManager"
         step: 1m
+        batchSize: 10
 
 
 integration:
